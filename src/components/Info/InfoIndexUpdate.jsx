@@ -152,7 +152,7 @@ function InfoIndexUpdate() {
             </List>
           </Paper>
         ) : (
-          <Typography variant="body1" color="text.primary">
+          <Typography variant="body1" color="text.secondary">
             Nenhum pagamento carregado ainda.
           </Typography>
         )}
