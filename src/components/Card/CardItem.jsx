@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Button, Box, CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function CardItem({ title, description, firebaseId }) {
+function CardItem({ title, description, currentDate, firebaseId }) {
     
     const navigate = useNavigate();
 

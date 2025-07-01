@@ -32,12 +32,9 @@ function Create() {
         const db = getDatabase(app);
         const newDocRef = push(ref(db, "cards"));
 
-        const currentDate = new Date().toISOString();
-
         set(newDocRef, {
             title: inputTitle,
             description: inputDescription,
-            create_date: currentDate
         })
             .then(() => {
                 alert("Dados salvos com sucesso!");
@@ -58,14 +55,14 @@ function Create() {
         <Box>
             <ResponsiveAppBar user={user} />
             <Box sx={{ p: 4, maxWidth: 400, mx: 'auto', textAlign: 'center' }}>
-            
-            {Object.keys(errors).length > 0 && (
-                <Alert severity="error" sx={{ mb: 2, textAlign: 'left' }}>
-                    {Object.values(errors).map((error, index) => (
-                        <div key={index}>• {error}</div>
-                    ))}
+
+                {Object.keys(errors).length > 0 && (
+                    <Alert severity="error" sx={{ mb: 2, textAlign: 'left' }}>
+                        {Object.values(errors).map((error, index) => (
+                            <div key={index}>• {error}</div>
+                        ))}
                     </Alert>
-            )}
+                )}
 
                 <Typography variant="h4" gutterBottom>
                     Adicionar Imóvel
@@ -98,7 +95,7 @@ function Create() {
                     >
                         Voltar
                     </Button>
-                
+
                     <Button
                         variant="contained"
                         color="primary"
@@ -108,8 +105,8 @@ function Create() {
                         Criar Imóvel
                     </Button>
                 </Box>
-            </Box> 
-        </Box>       
+            </Box>
+        </Box>
     );
 }
 

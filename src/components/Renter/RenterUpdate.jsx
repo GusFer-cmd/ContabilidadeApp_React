@@ -21,67 +21,67 @@ function RenterUpdate() {
     }, []);
 
     useEffect(() => {
-            const fetchData = async () => {
-                const db = getDatabase(app);
-                const dbRef = ref(db, "renters/" + firebaseId);
-                const snapshot = await get(dbRef);
-                if (snapshot.exists()) {
-                    const targetObject = snapshot.val();
-                    setInputName(targetObject.name);
-                    setInputAssignedSex(targetObject.assigned_sex);
-                    setInputTelephone(targetObject.telephone);
-                    setInputEmail(targetObject.email)
-                } else {
-                alert("Nenhum dado encontrado.");
-                }
+        const fetchData = async () => {
+            const db = getDatabase(app);
+            const dbRef = ref(db, "renters/" + firebaseId);
+            const snapshot = await get(dbRef);
+            if (snapshot.exists()) {
+                const targetObject = snapshot.val();
+                setInputName(targetObject.name);
+                setInputAssignedSex(targetObject.assigned_sex);
+                setInputTelephone(targetObject.telephone);
+                setInputEmail(targetObject.email)
+            } else {
+            alert("Nenhum dado encontrado.");
             }
-        fetchData();
+        }
+    fetchData();
     }, [firebaseId])
 
-        const validateForm = () => {
-            const newErrors = {};
+    const validateForm = () => {
+        const newErrors = {};
 
-            if (!inputName) newErrors.inputName = "Nome é obrigatório.";
-            if (!inputAssignedSex) newErrors.inputAssignedSex = "Sexo Atribuído é obrigatório.";
-            if (!inputTelephone) newErrors.inputTelephone = "Telefone é obrigatório.";
-            if (!inputEmail) newErrors.inputEmail = "Email é obrigatório.";
+        if (!inputName) newErrors.inputName = "Nome é obrigatório.";
+        if (!inputAssignedSex) newErrors.inputAssignedSex = "Sexo Atribuído é obrigatório.";
+        if (!inputTelephone) newErrors.inputTelephone = "Telefone é obrigatório.";
+        if (!inputEmail) newErrors.inputEmail = "Email é obrigatório.";
 
-            setErrors(newErrors);
-            return Object.keys(newErrors).length === 0;
-        };
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
-        const overwriteData = async () => {
-            if (!validateForm()) return;
-            const db = getDatabase(app);
-            const newDocRef = ref(db, "renters/" + firebaseId);
-            set(newDocRef, {
-                name: inputName,
-                assigned_sex: inputAssignedSex,
-                telephone: inputTelephone,
-                email: inputEmail
-            }).then(() => {
-                alert("Dados salvos com sucesso!");
-                navigate("/renter");
-            })
-            .catch((error) => {
-                alert("Erro: " + error.message);
-            });
-        };
-
-        const handleBack = () => {
+    const overwriteData = async () => {
+        if (!validateForm()) return;
+        const db = getDatabase(app);
+        const newDocRef = ref(db, "renters/" + firebaseId);
+        set(newDocRef, {
+            name: inputName,
+            assigned_sex: inputAssignedSex,
+            telephone: inputTelephone,
+            email: inputEmail
+        }).then(() => {
+            alert("Dados salvos com sucesso!");
             navigate("/renter");
-            window.location.reload();
-        }
+        })
+        .catch((error) => {
+            alert("Erro: " + error.message);
+        });
+    };
 
-        const sexOptions = [
-            { value: 'Masculino', label: 'Masculino' },
-            { value: 'Feminino', label: 'Feminino' },
-            { value: 'Outro', label: 'Outro' },
-        ];
+    const handleBack = () => {
+        navigate("/renter");
+        window.location.reload();
+    }
 
-        return (
-        <Box>
-            <ResponsiveAppBar user={user} />
+    const sexOptions = [
+        { value: 'Masculino', label: 'Masculino' },
+        { value: 'Feminino', label: 'Feminino' },
+        { value: 'Outro', label: 'Outro' },
+    ];
+
+    return (
+    <Box>
+        <ResponsiveAppBar user={user} />
             <Box sx={{ p: 4, maxWidth: 400, mx: 'auto', textAlign: 'center' }}>
 
                 {Object.keys(errors).length > 0 && (

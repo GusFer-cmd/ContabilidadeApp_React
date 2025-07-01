@@ -62,7 +62,7 @@ function Dashboard() {
                             <Grid item xs={12} sm={6} md={4} key={card.id}>
                                 <CardItem 
                                     title={card.title} 
-                                    description={card.description} 
+                                    description={card.description}
                                     firebaseId={card.id}
                                 />
                             </Grid>
